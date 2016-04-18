@@ -6,8 +6,8 @@ optionA() {
 	ROOT="/*"
 	EXCLUDE_DIRS="--exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found --exclude=/backupfolder/*"
 	BACKUP_TO="/backupfolder"
-	DATE=`date +%d%m%y`
-	FILENAME=backup-$TIME.tar.gz
+	DATE=`date +%d%m%y-%X`
+	FILENAME=backup-$DATE.tar.gz
 	tar cvpfz $BACKUP_TO/$FILENAME $ROOT $EXCLUDE_DIRS
 	echo -e "\n-->Files have been backed up!"
 	
