@@ -1,14 +1,14 @@
-#'|' is used to pipe the command in order to use 'grep' to choose which to display, and 'uniq' to avoid data being displayed twice 
+7#'|' is used to pipe the command in order to use 'grep' to choose which to display, and 'uniq' to avoid data being displayed twice 
 
 #Declaring functions for options A to K
 optionA() {
 	clear
-	ROOT = "/*"
-	EXCLUDE_DIRS = "--exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found --exlude-/backupfolder"
-	BACKUP_TO =  "/backupfolder"
-	DATE = `date +%d%m%y`
-	FILENAME = backup-$TIME.tar.gz
-	tar cvpfz $BACKUP_TO/$FILENAME/$ROOT/$EXCLUDE_DIRS
+	ROOT="/*"
+	EXCLUDE_DIRS="--exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found --exclude=/backupfolder/*"
+	BACKUP_TO="/backupfolder"
+	DATE=`date +%d%m%y`
+	FILENAME=backup-$TIME.tar.gz
+	tar cvpfz $BACKUP_TO/$FILENAME $ROOT $EXCLUDE_DIRS
 	echo -e "\n-->Files have been backed up!"
 	
 	
