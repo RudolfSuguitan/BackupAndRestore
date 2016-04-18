@@ -1,14 +1,17 @@
-7#'|' is used to pipe the command in order to use 'grep' to choose which to display, and 'uniq' to avoid data being displayed twice 
+#'|' is used to pipe the command in order to use 'grep' to choose which to display, and 'uniq' to avoid data being displayed twice 
 
 #Declaring functions for options A to K
 optionA() {
 	clear
 	ROOT="/*"
-	EXCLUDE_DIRS="--exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found --exclude=/backupfolder/*"
+	EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found --exclude=/backupfolder/*"
 	BACKUP_TO="/backupfolder"
 	DATE=`date +%d%m%y-%X`
-	FILENAME=backup-$DATE.tar.gz
-	tar cvpfz $BACKUP_TO/$FILENAME $ROOT $EXCLUDE_DIRS
+	#FILENAME=backup-$DATE.tar.gz
+	#tar cvpfz $BACKUP_TO/$FILENAME $ROOT $EXCLUDE_DIRS
+	#rsync -avz --delete /testbackup/ /backupfolder/
+	#tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS && rsync -av --delete /ZIPPEFILES/ /backupfolder/
+	zip /ZippedFiles/archive1995.zip $ROOT && rsync -av --delete /ZippedFiles/ /backupfolder/
 	echo -e "\n-->Files have been backed up!"
 	
 	
