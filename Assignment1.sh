@@ -4,14 +4,14 @@
 optionA() {
 	clear
 	ROOT="/*"
-	EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found --exclude=/backupfolder/*"
+	EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/backupfolder/* --exclude=/ZippedFiles/* --exclude=/usr/*"
 	BACKUP_TO="/backupfolder"
-	DATE=`date +%d%m%y-%X`
-	#FILENAME=backup-$DATE.tar.gz
+	DATE=`date +%d%m%y` #-%X`
+	FILENAME=backup-$DATE.tar.gz
 	#tar cvpfz $BACKUP_TO/$FILENAME $ROOT $EXCLUDE_DIRS
 	#rsync -avz --delete /testbackup/ /backupfolder/
-	#tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS && rsync -av --delete /ZIPPEFILES/ /backupfolder/
-	zip /ZippedFiles/archive1995.zip $ROOT && rsync -av --delete /ZippedFiles/ /backupfolder/
+	tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS && rsync -av --delete /ZippedFiles/ /backupfolder/
+	#zip /ZippedFiles/archive1995.zip $ROOT && rsync -av --delete /ZippedFiles/ /backupfolder/
 	echo -e "\n-->Files have been backed up!"
 	
 	
