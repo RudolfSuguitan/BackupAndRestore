@@ -51,9 +51,18 @@ optionB() {
 optionC() {
 	clear
 	cd /media
-	echo -e "\n\tThese are the available external memories: \n\t--> $(ls)"
+	echo -e "\n\tThese are you directories for external memories: \n\t--> $(ls)"
+	echo -e "\n\tPlease enter which directory your external memory is located."
+        echo -e -n "\n\t--->Input: "
+	read INPUT1
+	cd /media/$INPUT1
+	echo -e "\n\tThese are the available external memories in selected directoy: \n\t--> $(ls)"
 	echo -e "\n\tPlease enter which external memory you want to backup into."
         echo -e -n "\n\t--->Input: "
+	read INPUT2
+	cd /media/$INPUT1/$INPUT2
+	
+
 }
 
 optionD() {
