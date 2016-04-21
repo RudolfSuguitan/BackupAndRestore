@@ -4,7 +4,7 @@
 optionA() {
 	clear
 	ROOT="/*"
-	EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/backupfolder/* --exclude=/ZippedFiles/* --exclude=/usr/*"
+	EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/backupfolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
 	BACKUP_TO="/backupfolder"
 	DATE=`date +%d%m%y` #-%X`
 	FILENAME=backup-$DATE.tar.gz
@@ -13,36 +13,47 @@ optionA() {
 	tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS && rsync -av --delete /ZippedFiles/ /backupfolder/
 	#zip /ZippedFiles/archive1995.zip $ROOT && rsync -av --delete /ZippedFiles/ /backupfolder/
 	echo -e "\n-->Files have been backed up!"
-	
-	
 }
 
 optionB() {
 	clear
-	echo -e "\n-->These are the list of existing files available for editing:\n$(ls)"
-	echo -e "\n\t Please type the name of file you want to edit."
-	echo -e "\n\t Note that if the file does not exist, a new file will be created."
-	echo -e "\n\t To add data in file, please press i."
-	echo -e "\n\t After editing, press ESC and enter :wq to save and exit."
-	echo -e "\n\t Alternatively, enter :q to exit without saving."
-	
-	echo -e -n "\n\t--->Input: "
-	read filename
-	#Not allowing the user to edit or view this file as it contains this code.
-	if test $filename = "assignment7.sh"
-	then
-		echo -e "\n\t You are not allowed to edit or view this file!"
-		echo -e "\n\t Please choose a different file."
-	else
-		vi $filename #Create/open selected file using vi editor
-	fi
+	ROOT="/*"
+        EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/backupfolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
+     	cd /home
+	echo -e "\n\tThese are you home directories: \n\t--> $(ls)"
+	echo -e "\n\tPlease enter which directory your Dropbox is located."
+        echo -e -n "\n\t--->Input: "
+        read option
+	USER=$option
+	BACKUP_TO1="/home/$USER/Dropbox/"
+        DATE=`date +%d%m%y` #-%X`
+        FILENAME=backup-$DATE.tar.gz
+        #tar cvpfz $BACKUP_TO/$FILENAME $ROOT $EXCLUDE_DIRS
+        #rsync -avz --delete /testbackup/ /backupfolder/
+	cd $BACKUP_TO1
+	mkdir -p testfolder5
+	BACKUP_TO2="/home/$USER/Dropbox/testfolder5"
+	cd $BACKUP_TO2
+	mkdir -p LinuxBackup
+	BACKUP_TO3="/home/$USER/Dropbox/testfolder5/LinuxBackup"
+	cd $BACKUP_TO3
+	touch test3.txt
+        #tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS && rsync -av /ZippedFiles/ $BACKUP_TO
+        #zip /ZippedFiles/archive1995.zip $ROOT && rsync -av --delete /ZippedFiles/ /backupfolder/
+        echo -e "\n-->Files have been backed up!"
+
+	#cd /home/rudy/Dropbox
+	#mkdir testfolder
+	#cd /
+	echo -e "\n-->Check Dropbox folder!"
 }
 
 optionC() {
 	clear
-	echo -e "\n-->Your current shell is: $SHELL."
-	echo -e "\n-->Your home directory is: $HOME."
-	echo -e "\n-->Your operating system type is: $(uname)."
+	cd /media
+	echo -e "\n\tThese are the available external memories: \n\t--> $(ls)"
+	echo -e "\n\tPlease enter which external memory you want to backup into."
+        echo -e -n "\n\t--->Input: "
 }
 
 optionD() {
@@ -221,9 +232,9 @@ do
 	clear
 
 	echo -e "\n\tChoose from the following option A to K."
-	echo -e "\n\tA-->Back up files."
-	echo -e "\tB-->Edit a file using vi editor."
-	echo -e "\tC-->Show current shell, home directory, and operating system."
+	echo -e "\n\tA-->Back up into root."
+	echo -e "\tB-->Back up into Dropbox folder."
+	echo -e "\tC-->Back up into external memory."
 	echo -e "\tD-->Show current path settings and current working directory."
 	echo -e "\tE-->Show the number of users currently logged."
 	echo -e "\tF-->Show the OS version, release number, and kernel version."
