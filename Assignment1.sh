@@ -1,13 +1,20 @@
 #'|' is used to pipe the command in order to use 'grep' to choose which to display, and 'uniq' to avoid data being displayed twice 
 
 #Declaring functions for options A to K
+EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/*  --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/backupfolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
+DATE=`date +%d%m%y` #-%X`
+FILENAME=backup-$DATE.tar.gz
+
 optionA() {
 	clear
+	cd /
+	mkdir -p backupfolder
+	mkdir -p ZippedFiles
 	ROOT="/*"
-	EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/backupfolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
+	#EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/backupfolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
 	BACKUP_TO="/backupfolder"
-	DATE=`date +%d%m%y` #-%X`
-	FILENAME=backup-$DATE.tar.gz
+	#DATE=`date +%d%m%y` #-%X`
+	#FILENAME=backup-$DATE.tar.gz
 	#tar cvpfz $BACKUP_TO/$FILENAME $ROOT $EXCLUDE_DIRS
 	#rsync -avz --delete /testbackup/ /backupfolder/
 	tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS && rsync -av --delete /ZippedFiles/ /backupfolder/
@@ -17,8 +24,11 @@ optionA() {
 
 optionB() {
 	clear
+	cd /
+	mkdir -p backupfolder
+        mkdir -p ZippedFiles
 	ROOT="/*"
-        EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/backupfolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
+        #EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/backupfolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
      	cd /home
 	echo -e "\n\tThese are you home directories: \n\t--> $(ls)"
 	echo -e "\n\tPlease enter which directory your Dropbox is located."
@@ -26,30 +36,29 @@ optionB() {
         read option
 	USER=$option
 	BACKUP_TO1="/home/$USER/Dropbox/"
-        DATE=`date +%d%m%y` #-%X`
-        FILENAME=backup-$DATE.tar.gz
+        #DATE=`date +%d%m%y` #-%X`
+        #FILENAME=backup-$DATE.tar.gz
         #tar cvpfz $BACKUP_TO/$FILENAME $ROOT $EXCLUDE_DIRS
         #rsync -avz --delete /testbackup/ /backupfolder/
 	cd $BACKUP_TO1
-	mkdir -p testfolder5
-	BACKUP_TO2="/home/$USER/Dropbox/testfolder5"
+	mkdir -p BackupFolder
+	BACKUP_TO2="/home/$USER/Dropbox/BackupFolder"
 	cd $BACKUP_TO2
 	mkdir -p LinuxBackup
-	BACKUP_TO3="/home/$USER/Dropbox/testfolder5/LinuxBackup"
+	BACKUP_TO3="/home/$USER/Dropbox/BackupFolder/LinuxBackup"
 	cd $BACKUP_TO3
-	touch test3.txt
-        #tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS && rsync -av /ZippedFiles/ $BACKUP_TO
-        #zip /ZippedFiles/archive1995.zip $ROOT && rsync -av --delete /ZippedFiles/ /backupfolder/
-        echo -e "\n-->Files have been backed up!"
-
-	#cd /home/rudy/Dropbox
-	#mkdir testfolder
-	#cd /
-	echo -e "\n-->Check Dropbox folder!"
+        tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS && rsync -av --delete /ZippedFiles/ $BACKUP_TO3
+        echo -e "\n\t-->Files have been backed up!"
+	echo -e "\n\t-->Check Dropbox folder!"
 }
 
 optionC() {
 	clear
+	cd /
+        mkdir -p backupfolder
+        mkdir -p ZippedFiles
+	ROOT="/*"
+        #EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sy$
 	cd /media
 	echo -e "\n\tThese are you directories for external memories: \n\t--> $(ls)"
 	echo -e "\n\tPlease enter which directory your external memory is located."
@@ -61,8 +70,15 @@ optionC() {
         echo -e -n "\n\t--->Input: "
 	read INPUT2
 	cd /media/$INPUT1/$INPUT2
-	
-
+	mkdir -p BackupFolder
+	cd /media/$INPUT1/$INPUT2/BackupFolder
+	mkdir -p LinuxBackup
+	BACKUP_TO="/media/$INPUT1/$INPUT2/BackupFolder/LinuxBackup"
+	cd $BACKUP_TO
+	#touch test.txt
+	tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS && rsync -av --delete /ZippedFiles/ $BACKUP_TO
+	echo -e "\n\t-->Files have been backed up!"
+        echo -e "\n\t-->Check external memory!"
 }
 
 optionD() {
