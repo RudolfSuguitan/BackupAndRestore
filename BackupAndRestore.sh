@@ -1,7 +1,12 @@
 #Declaring GLOBAL variables
 EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/*  --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/BackupFolder/* --exclude=/RestoreFolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
 DATE=`date +%d%m%y` #-%X`
+DATE2=`date +"%A %d-%B-%Y %R"`
 FILENAME=Backup-$DATE.tar.gz
+SBLOG="--> $DATE2 -- $FILENAME -- Full System Back Up -- SUCCESSFULL! <--"
+FBLOG="--> $DATE2 -- $FILENAME -- Full System Back Up -- UNSUCCESSFULL! <--"
+SRLOG="--> $DATE2 -- $FILENAME -- Full System Restore -- SUCCESSFULL! <--"
+FRLOG="--> $DATE2 -- $FILENAME -- Full System Restore -- UNSUCCESSFULL! <--"
 
 #Declaring functions
 option1() {
@@ -20,13 +25,27 @@ option1() {
         then
                 tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS
 		clear
-		rsync -av --delete /ZippedFiles/ $BACKUP_TO
+		rsync -av /ZippedFiles/ $BACKUP_TO
 		if [ "$?" -eq "0" ]
 		then
   			echo -e "\n\t--> Files have been backed up!"
                 	echo -e "\n\t--> Check backup folder in root!"
+
+			if [ ! -e /$BACKUP_TO/LogFile.txt ]
+		        then
+                		echo $SBLOG > /$BACKUP_TO/LogFile.txt
+       			else
+                		echo $SBLOG >> /$BACKUP_TO/LogFile.txt
+        		fi
+
 		else
   			echo -e "\n\t--> Error occured! Please try again."
+			if [ ! -e /$BACKUP_TO/LogFile.txt ]
+		        then
+                		echo $FBLOG > /$BACKUP_TO/LogFile.txt
+        		else
+                		echo $FBLOG >> /$BACKUP_TO/LogFile.txt
+       			fi
 			return 0
 		fi
         elif test $answer = "2"
@@ -65,14 +84,27 @@ option2() {
         then
         	tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS
 		clear
-		rsync -av --delete /ZippedFiles/ $BACKUP_TO3
+		rsync -av /ZippedFiles/ $BACKUP_TO3
 	        if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files have been backed up!"
                         echo -e "\n\t--> Check backup folder in Dropbox!"
+			if [ ! -e /$BACKUP_TO3/LogFile.txt ]
+        		then
+                		echo $SBLOG > /$BACKUP_TO3/LogFile.txt
+        		else
+                		echo $SBLOG >> /$BACKUP_TO3/LogFile.txt
+        		fi
+
                 else
                         echo -e "\n\t--> Error occured! Please try again."
-                        return 0
+                        if [ ! -e /$BACKUP_TO3/LogFile.txt ]
+		        then
+                		echo $FBLOG > /$BACKUP_TO3/LogFile.txt
+        		else
+                		echo $FBLOG >> /$BACKUP_TO3/LogFile.txt
+        		fi
+			return 0
                 fi
         elif test $answer = "2"
         then
@@ -112,14 +144,28 @@ option3() {
         then
                 tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS
 		clear
-		rsync -av --delete /ZippedFiles/ $BACKUP_TO
+		rsync -av /ZippedFiles/ $BACKUP_TO
 	        if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files have been backed up!"
                         echo -e "\n\t--> Check backup folder in external memory!"
-                else
+               		if [ ! -e /$BACKUP_TO/LogFile.txt ]
+        		then
+                		echo $SBLOG > /$BACKUP_TO/LogFile.txt
+        		else
+                		echo $SBLOG >> /$BACKUP_TO/LogFile.txt
+        		fi
+ 
+		else
                         echo -e "\n\t--> Error occured! Please try again."
-                        return 0
+                        if [ ! -e /$BACKUP_TO/LogFile.txt ]
+        		then
+                		echo $FBLOG > /$BACKUP_TO/LogFile.txt
+       			else
+                		echo $FBLOG >> /$BACKUP_TO/LogFile.txt
+        		fi
+
+			return 0
                 fi
         elif test $answer = "2"
         then
@@ -151,9 +197,22 @@ option4() {
                 if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files has been restored successfully!"
+			if [ ! -e /BackupFolder/LogFile.txt ]
+        		then
+                		echo $SRLOG > /BackupFolder/LogFile.txt
+        		else
+                		echo $SRLOG >> /BackupFolder/LogFile.txt
+        		fi
                 else
                         echo -e "\n\t--> Error occured! Please try again."
-                        return 0
+                        if [ ! -e /BackupFolder/LogFile.txt ]
+                        then
+                                echo $FRLOG > /BackupFolder/LogFile.txt
+                        else
+                                echo $FRLOG >> /BackupFolder/LogFile.txt
+                        fi
+
+			return 0
                 fi
         elif test $answer = "2"
         then
@@ -180,6 +239,7 @@ option5() {
         cd /home/$USER/Dropbox/BackupFolder
         mkdir -p LinuxBackup
         cd /home/$USER/Dropbox/BackupFolder/LinuxBackup
+	BFOLDER="/home/$USER/Dropbox/BackupFolder/LinuxBackup"
 	clear
 	echo -e "\n->Choose which of the following restore points to restore.\n"
         ls | grep Backup
@@ -197,9 +257,23 @@ option5() {
                 if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files has been restored successfully!"
-                else
+               		if [ ! -e /$BFOLDER/LogFile.txt ]
+                        then
+                                echo $SRLOG > /$BFOLDER/LogFile.txt
+                        else
+                                echo $SRLOG >> /$BFOLDER/LogFile.txt
+                        fi
+ 
+		else
                         echo -e "\n\t--> Error occured! Please try again."
-                        return 0
+                        if [ ! -e /$BFOLDER/LogFile.txt ]
+                        then
+                                echo $FRLOG > /$BFOLDER/LogFile.txt
+                        else
+                                echo $FRLOG >> /$BFOLDER/LogFile.txt
+                        fi
+
+			return 0
                 fi
         elif test $answer = "2"
         then
@@ -212,6 +286,7 @@ option5() {
 
 option6() {
 	clear
+	cd /
 	mkdir -p RestoreFolder
 	rm -rf /RestoreFolder/*
 
@@ -248,9 +323,23 @@ option6() {
                 if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files has been restored successfully!"
-                else
+               		if [ ! -e /$BACKUP_TO/LogFile.txt ]
+                        then
+                                echo $SRLOG > /$BACKUP_TO/LogFile.txt
+                        else
+                                echo $SRLOG >> /$BACKUP_TO/LogFile.txt
+                        fi
+ 
+		else
                         echo -e "\n\t--> Error occured! Please try again."
-                        return 0
+                        if [ ! -e /$BACKUP_TO/LogFile.txt ]
+                        then
+                                echo $FRLOG > /$BACKUP_TO/LogFile.txt
+                        else
+                                echo $FRLOG >> /$BACKUP_TO/LogFile.txt
+                        fi
+
+			return 0
                 fi
         elif test $answer = "2"
         then
