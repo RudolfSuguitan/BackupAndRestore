@@ -1,6 +1,6 @@
-BackupAndRestore
-Assignment for Software Installation
-Rudolf Suguitan - C13460538
+#BackupAndRestore
+#Assignment for Software Installation
+#Rudolf Suguitan - C13460538
 
 This assignment allows the users to back up and restore the entire* root 
 directory to 3 different locations: to a backup folder in the root directory, 
