@@ -137,8 +137,30 @@ option4() {
 	cd /BackupFolder
 	echo -e "\n->Choose which of the following restore points to restore.\n"
 	ls | grep Backup
+	echo -e -n "\n\t ---> Input: "
 	read RP
-	tar zxvf $RP -C /RestoreFolder/
+
+	echo -e "\n\t Comfirm restore?"
+        echo -e "\n\t Please enter 1 for YES or 2 for NO."
+        echo -e -n "\n\t ---> Input: "
+        read answer
+
+	if test $answer  = "1"
+        then
+               	tar zxvf $RP -C /RestoreFolder/
+                if [ "$?" -eq "0" ]
+                then
+                        echo -e "\n\t--> Files has been restored successfully!"
+                else
+                        echo -e "\n\t--> Error occured! Please try again."
+                        return 0
+                fi
+        elif test $answer = "2"
+        then
+                return 0 #Bring back to the main menu
+        else
+                echo -e "\n\t INVALID INPUT!"
+        fi
 }
 
 option5() {
@@ -158,13 +180,34 @@ option5() {
         cd /home/$USER/Dropbox/BackupFolder
         mkdir -p LinuxBackup
         cd /home/$USER/Dropbox/BackupFolder/LinuxBackup
-	touch fromDB.txt
 	clear
 	echo -e "\n->Choose which of the following restore points to restore.\n"
         ls | grep Backup
-
+	echo -e -n "\n\t ---> Input: "
 	read RP
-        tar zxvf $RP -C /RestoreFolder/
+
+	echo -e "\n\t Comfirm restore?"
+        echo -e "\n\t Please enter 1 for YES or 2 for NO."
+        echo -e -n "\n\t ---> Input: "
+        read answer
+
+        if test $answer  = "1"
+        then
+                tar zxvf $RP -C /RestoreFolder/
+                if [ "$?" -eq "0" ]
+                then
+                        echo -e "\n\t--> Files has been restored successfully!"
+                else
+                        echo -e "\n\t--> Error occured! Please try again."
+                        return 0
+                fi
+        elif test $answer = "2"
+        then
+                return 0 #Bring back to the main menu
+        else
+                echo -e "\n\t INVALID INPUT!"
+        fi
+
 }
 
 option6() {
@@ -188,18 +231,34 @@ option6() {
         mkdir -p LinuxBackup
         BACKUP_TO="/media/$INPUT1/$INPUT2/BackupFolder/LinuxBackup"
 	cd $BACKUP_TO
-	touch fromEM.txt
 
 	echo -e "\n->Choose which of the following restore points to restore.\n"
         ls | grep Backup
-
+	echo -e -n "\n\t ---> Input: "
 	read RP
-        tar zxvf $RP -C /RestoreFolder/
 
-}
+	echo -e "\n\t Comfirm restore?"
+        echo -e "\n\t Please enter 1 for YES or 2 for NO."
+        echo -e -n "\n\t ---> Input: "
+        read answer
 
-option() {
-	echo "teset"
+        if test $answer  = "1"
+        then
+                tar zxvf $RP -C /RestoreFolder/
+                if [ "$?" -eq "0" ]
+                then
+                        echo -e "\n\t--> Files has been restored successfully!"
+                else
+                        echo -e "\n\t--> Error occured! Please try again."
+                        return 0
+                fi
+        elif test $answer = "2"
+        then
+                return 0 #Bring back to the main menu
+        else
+                echo -e "\n\t INVALID INPUT!"
+        fi
+
 }
 
 option7() {
@@ -263,6 +322,6 @@ do
 		6) option6;;
 		7) option7;;
 		#If  wrong option is entered, this will give an error message
-		*) echo -e "\n\tINVALID INPUT!";;
+		*) echo -e "$(clear)\n\t---> INVALID INPUT! <---";;
 	esac
 done
