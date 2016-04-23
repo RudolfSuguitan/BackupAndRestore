@@ -1,14 +1,15 @@
 #Declaring GLOBAL variables
-EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/*  --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/BackupFolder/* --exclude=/RestoreFolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
+DIR_EX="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/*  --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/BackupFolder/* --exclude=/RestoreFolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
 DATE=`date +%d%m%y` #-%X`
 DATE2=`date +"%A %d-%B-%Y %R"`
-FILENAME=Backup-$DATE.tar.gz
+FILENAME=LinuxBackup-$DATE.tar.gz
 SBLOG="--> $DATE2 -- $FILENAME -- Full System Back Up -- SUCCESSFULL! <--"
 FBLOG="--> $DATE2 -- $FILENAME -- Full System Back Up -- UNSUCCESSFULL! <--"
 SRLOG="--> $DATE2 -- $FILENAME -- Full System Restore -- SUCCESSFULL! <--"
 FRLOG="--> $DATE2 -- $FILENAME -- Full System Restore -- UNSUCCESSFULL! <--"
 
 #Declaring functions
+#backup to root
 option1() {
 	clear
 	cd /
@@ -23,14 +24,15 @@ option1() {
 
         if test $answer  = "1"
         then
-                tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS
+                tar cvpfz /ZippedFiles/$FILENAME $DIR_EX
 		clear
 		rsync -av /ZippedFiles/ $BACKUP_TO
+		#check if command is successful
 		if [ "$?" -eq "0" ]
 		then
   			echo -e "\n\t--> Files have been backed up!"
                 	echo -e "\n\t--> Check backup folder in root!"
-
+			#creating log file
 			if [ ! -e /$BACKUP_TO/LogFile.txt ]
 		        then
                 		echo $SBLOG > /$BACKUP_TO/LogFile.txt
@@ -55,7 +57,7 @@ option1() {
                 echo -e "\n\t INVALID INPUT!"
         fi
 }
-
+#backup to dropbox
 option2() {
 	clear
 	cd /
@@ -82,9 +84,10 @@ option2() {
 
 	if test $answer  = "1"
         then
-        	tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS
+        	tar cvpfz /ZippedFiles/$FILENAME $DIR_EX
 		clear
 		rsync -av /ZippedFiles/ $BACKUP_TO3
+		#check if command is successful
 	        if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files have been backed up!"
@@ -113,7 +116,7 @@ option2() {
                 echo -e "\n\t INVALID INPUT!"
         fi
 }
-
+#backup to external memory
 option3() {
 	clear
 	cd /
@@ -142,9 +145,10 @@ option3() {
 
         if test $answer  = "1"
         then
-                tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS
+                tar cvpfz /ZippedFiles/$FILENAME $DIR_EX
 		clear
 		rsync -av /ZippedFiles/ $BACKUP_TO
+		#check if command is successful
 	        if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files have been backed up!"
@@ -174,7 +178,7 @@ option3() {
                 echo -e "\n\t INVALID INPUT!"
         fi
 }
-
+#restore to root
 option4() {
 	clear
 	cd /
@@ -182,7 +186,7 @@ option4() {
 	rm -rf /RestoreFolder/*
 	cd /BackupFolder
 	echo -e "\n->Choose which of the following restore points to restore.\n"
-	ls | grep Backup
+	ls | grep LinuxBackup
 	echo -e -n "\n\t ---> Input: "
 	read RP
 
@@ -194,6 +198,7 @@ option4() {
 	if test $answer  = "1"
         then
                	tar zxvf $RP -C /RestoreFolder/
+		#check if command is successfull
                 if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files has been restored successfully!"
@@ -221,7 +226,7 @@ option4() {
                 echo -e "\n\t INVALID INPUT!"
         fi
 }
-
+#restore from dropbox
 option5() {
 	clear
 	cd /
@@ -242,7 +247,7 @@ option5() {
 	BFOLDER="/home/$USER/Dropbox/BackupFolder/LinuxBackup"
 	clear
 	echo -e "\n->Choose which of the following restore points to restore.\n"
-        ls | grep Backup
+        ls | grep LinuxBackup
 	echo -e -n "\n\t ---> Input: "
 	read RP
 
@@ -254,6 +259,7 @@ option5() {
         if test $answer  = "1"
         then
                 tar zxvf $RP -C /RestoreFolder/
+		#check if command is successfull
                 if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files has been restored successfully!"
@@ -283,7 +289,7 @@ option5() {
         fi
 
 }
-
+#restore from external memory
 option6() {
 	clear
 	cd /
@@ -308,7 +314,7 @@ option6() {
 	cd $BACKUP_TO
 
 	echo -e "\n->Choose which of the following restore points to restore.\n"
-        ls | grep Backup
+        ls | grep LinuxBackup
 	echo -e -n "\n\t ---> Input: "
 	read RP
 
@@ -320,6 +326,7 @@ option6() {
         if test $answer  = "1"
         then
                 tar zxvf $RP -C /RestoreFolder/
+		#check if command is successfull
                 if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files has been restored successfully!"
@@ -349,7 +356,7 @@ option6() {
         fi
 
 }
-
+#exit
 option7() {
 	clear
 	#Reassuring if the user really want to exit

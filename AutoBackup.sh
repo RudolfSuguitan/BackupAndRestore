@@ -1,6 +1,6 @@
 #!/bin/bash
 #Declaring variables
-EXCLUDE_DIRS="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/BackupFolder/*  --exclude=/RestoreFolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
+DIR_EX="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/* --exclude=/home/* --exclude=/proc/* --exclude=/sys/* --exclude=/tmp/* --exclude=/run/* --exclude=/lib/* --exclude=/mnt/* --exclude=/media/* --exclude=/lost+found/* --exclude=/BackupFolder/*  --exclude=/RestoreFolder/* --exclude=/ZippedFiles/* --exclude=/usr/* --exclude=/var/*"
 DATE=`date +%d%m%y` #-%X`
 DATE2=`date +"%A %d-%B-%Y %R"`
 FILENAME=Backup-$DATE.tar.gz
@@ -12,7 +12,7 @@ mkdir -p BackupFolder
 mkdir -p ZippedFiles
 BACKUP_TO="/BackupFolder/"
 
-tar cvpfz /ZippedFiles/$FILENAME $EXCLUDE_DIRS && rsync -av /ZippedFiles/ $BACKUP_TO
+tar cvpfz /ZippedFiles/$FILENAME $DIR_EX && rsync -av /ZippedFiles/ $BACKUP_TO
 
 if [ "$?" -eq "0" ]
 then
