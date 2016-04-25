@@ -50,6 +50,7 @@ HOW THE CODE WORKS
 	RestoreFolder in the root. These options are shown on the main menu.  
 	this script also includes error checkings which catch any invalid inputs  
 	and display error messages. eg when backup or restore was unsuccessful.  
+	note that you can only restore after backing up to that location.  
 3-Files to be backed up  
 	By defeault, the scripts only backup some folder in the root directory.  
 	however you can choose which directories you want to back up  
