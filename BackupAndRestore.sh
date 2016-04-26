@@ -12,10 +12,10 @@ DIR_EX="/* --exclude=/dev/* --exclude=/boot/* --exclude=/cdrom/* --exclude=/dev/
 DATE=`date +%d%m%y` #-%X`
 DATE2=`date +"%A %d-%B-%Y %R"`
 FILENAME=LinuxBackup-$DATE.tar.gz
-SBLOG="--> $DATE2 -- $FILENAME -- Full System Back Up -- SUCCESSFULL! <--"
-FBLOG="--> $DATE2 -- $FILENAME -- Full System Back Up -- UNSUCCESSFULL! <--"
-SRLOG="--> $DATE2 -- $FILENAME -- Full System Restore -- SUCCESSFULL! <--"
-FRLOG="--> $DATE2 -- $FILENAME -- Full System Restore -- UNSUCCESSFULL! <--"
+SBLOG="--> $DATE2 -- Full System Back Up -- SUCCESSFULL! -- $FILENAME"
+FBLOG="--> $DATE2 -- Full System Back Up -- UNSUCCESSFULL! -- $FILENAME"
+SRLOG="--> $DATE2 -- Full System Restore -- SUCCESSFULL! -- "
+FRLOG="--> $DATE2 -- Full System Restore -- UNSUCCESSFULL! -- "
 
 #Declaring functions
 #backup to root
@@ -213,17 +213,17 @@ option4() {
                         echo -e "\n\t--> Files has been restored successfully!"
 			if [ ! -e /BackupFolder/LogFile.log ]
         		then
-                		echo $SRLOG > /BackupFolder/LogFile.log
+                		echo $SRLOG $RP > /BackupFolder/LogFile.log
         		else
-                		echo $SRLOG >> /BackupFolder/LogFile.log
+                		echo $SRLOG $RP >> /BackupFolder/LogFile.log
         		fi
                 else
                         echo -e "\n\t--> Error occured! Please try again."
                         if [ ! -e /BackupFolder/LogFile.log ]
                         then
-                                echo $FRLOG > /BackupFolder/LogFile.log
+                                echo $FRLOG $RP > /BackupFolder/LogFile.log
                         else
-                                echo $FRLOG >> /BackupFolder/LogFile.log
+                                echo $FRLOG $RP >> /BackupFolder/LogFile.log
                         fi
 
 			return 0
@@ -274,18 +274,18 @@ option5() {
                         echo -e "\n\t--> Files has been restored successfully!"
                		if [ ! -e /$BFOLDER/LogFile.log ]
                         then
-                                echo $SRLOG > /$BFOLDER/LogFile.log
+                                echo $SRLOG $RP > /$BFOLDER/LogFile.log
                         else
-                                echo $SRLOG >> /$BFOLDER/LogFile.log
+                                echo $SRLOG $RP >> /$BFOLDER/LogFile.log
                         fi
  
 		else
                         echo -e "\n\t--> Error occured! Please try again."
                         if [ ! -e /$BFOLDER/LogFile.log ]
                         then
-                                echo $FRLOG > /$BFOLDER/LogFile.log
+                                echo $FRLOG $RP > /$BFOLDER/LogFile.log
                         else
-                                echo $FRLOG >> /$BFOLDER/LogFile.log
+                                echo $FRLOG $RP >> /$BFOLDER/LogFile.log
                         fi
 
 			return 0
@@ -341,18 +341,18 @@ option6() {
                         echo -e "\n\t--> Files has been restored successfully!"
                		if [ ! -e /$BACKUP_TO/LogFile.log ]
                         then
-                                echo $SRLOG > /$BACKUP_TO/LogFile.log
+                                echo $SRLOG $RP > /$BACKUP_TO/LogFile.log
                         else
-                                echo $SRLOG >> /$BACKUP_TO/LogFile.log
+                                echo $SRLOG $RP >> /$BACKUP_TO/LogFile.log
                         fi
  
 		else
                         echo -e "\n\t--> Error occured! Please try again."
                         if [ ! -e /$BACKUP_TO/LogFile.log ]
                         then
-                                echo $FRLOG > /$BACKUP_TO/LogFile.log
+                                echo $FRLOG $RP > /$BACKUP_TO/LogFile.log
                         else
-                                echo $FRLOG >> /$BACKUP_TO/LogFile.log
+                                echo $FRLOG $RP >> /$BACKUP_TO/LogFile.log
                         fi
 
 			return 0

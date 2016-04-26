@@ -6,9 +6,8 @@ DATE=`date +%d%m%y` #-%X`
 DATE2=`date +"%A %d-%B-%Y %R"`
 FILENAME=LinuxBackup-$DATE.tar.gz
 
-SBLOG="--> $DATE2 -- $FILENAME -- Full System Back Up -- SUCCESSFULL Auto Backup <--"
-FBLOG="--> $DATE2 -- $FILENAME -- Full System Back Up -- UNSUCCESSFULL Auto Backup<--"
-FBLOG2="--> $DATE2 -- $FILENAME -- Full System Back Up -- UNSUCCESSFULL - Must be Root <--"
+SBLOG="--> $DATE2 -- Full System Back Up -- SUCCESSFULL! -- $FILENAME -- Auto Backup"
+FBLOG="--> $DATE2 -- Full System Back Up -- UNSUCCESSFULL! -- $FILENAME -- Auto Backup"
 
 cd /
 mkdir -p BackupFolder
