@@ -1,8 +1,9 @@
 #!/bin/bash
+
 #forcing the user to run as root
 if [ "$EUID" -ne "0" ]
 then
-	echo -e "\n\t--> You have to be root to run this file! < --"
+	echo -e "\n\t--> You have to be root to run this file! < --\n"
 	exit
 fi
 
