@@ -15,36 +15,23 @@ mkdir -p BackupFolder
 mkdir -p ZippedFiles
 BACKUP_TO="/BackupFolder/"
 
-#forcing the user to run as root
-if [ "$EUID" -ne "0" ]
-then
-	if [ ! -e /$BACKUP_TO/LogFile.txt ]
-	then
-		echo $FBLOG2 > /$BACKUP_TO/LogFile.txt
-	else
-		echo $FBLOG2 >> /$BACKUP_TO/LogFile.txt
-	fi
-
-        exit
-fi
-
 tar cvpfz /ZippedFiles/$FILENAME $DIR_EX && rsync -av /ZippedFiles/ $BACKUP_TO
 
 if [ "$?" -eq "0" ]
 then
-	if [ ! -e /$BACKUP_TO/LogFile.txt ]
+	if [ ! -e /$BACKUP_TO/LogFile.log ]
 	then
-   		echo $SBLOG > /$BACKUP_TO/LogFile.txt
+   		echo $SBLOG > /$BACKUP_TO/LogFile.log
 	else
-   		echo $SBLOG >> /$BACKUP_TO/LogFile.txt
+   		echo $SBLOG >> /$BACKUP_TO/LogFile.log
 	fi
 
 else
-	if [ ! -e /$BACKUP_TO/LogFile.txt ]
+	if [ ! -e /$BACKUP_TO/LogFile.log ]
         then
-                echo $FBLOG > /$BACKUP_TO/LogFile.txt
+                echo $FBLOG > /$BACKUP_TO/LogFile.log
         else
-                echo $FBLOG >> /$BACKUP_TO/LogFile.txt
+                echo $FBLOG >> /$BACKUP_TO/LogFile.log
         fi
 fi
 

@@ -42,20 +42,20 @@ option1() {
   			echo -e "\n\t--> Files have been backed up!"
                 	echo -e "\n\t--> Check backup folder in root!"
 			#creating log file
-			if [ ! -e /$BACKUP_TO/LogFile.txt ]
+			if [ ! -e /$BACKUP_TO/LogFile.log ]
 		        then
-                		echo $SBLOG > /$BACKUP_TO/LogFile.txt
+                		echo $SBLOG > /$BACKUP_TO/LogFile.log
        			else
-                		echo $SBLOG >> /$BACKUP_TO/LogFile.txt
+                		echo $SBLOG >> /$BACKUP_TO/LogFile.log
         		fi
 
 		else
   			echo -e "\n\t--> Error occured! Please try again."
-			if [ ! -e /$BACKUP_TO/LogFile.txt ]
+			if [ ! -e /$BACKUP_TO/LogFile.log ]
 		        then
-                		echo $FBLOG > /$BACKUP_TO/LogFile.txt
+                		echo $FBLOG > /$BACKUP_TO/LogFile.log
         		else
-                		echo $FBLOG >> /$BACKUP_TO/LogFile.txt
+                		echo $FBLOG >> /$BACKUP_TO/LogFile.log
        			fi
 			return 0
 		fi
@@ -101,20 +101,20 @@ option2() {
                 then
                         echo -e "\n\t--> Files have been backed up!"
                         echo -e "\n\t--> Check backup folder in Dropbox!"
-			if [ ! -e /$BACKUP_TO3/LogFile.txt ]
+			if [ ! -e /$BACKUP_TO3/LogFile.log ]
         		then
-                		echo $SBLOG > /$BACKUP_TO3/LogFile.txt
+                		echo $SBLOG > /$BACKUP_TO3/LogFile.log
         		else
-                		echo $SBLOG >> /$BACKUP_TO3/LogFile.txt
+                		echo $SBLOG >> /$BACKUP_TO3/LogFile.log
         		fi
 
                 else
                         echo -e "\n\t--> Error occured! Please try again."
-                        if [ ! -e /$BACKUP_TO3/LogFile.txt ]
+                        if [ ! -e /$BACKUP_TO3/LogFile.log ]
 		        then
-                		echo $FBLOG > /$BACKUP_TO3/LogFile.txt
+                		echo $FBLOG > /$BACKUP_TO3/LogFile.log
         		else
-                		echo $FBLOG >> /$BACKUP_TO3/LogFile.txt
+                		echo $FBLOG >> /$BACKUP_TO3/LogFile.log
         		fi
 			return 0
                 fi
@@ -162,20 +162,20 @@ option3() {
                 then
                         echo -e "\n\t--> Files have been backed up!"
                         echo -e "\n\t--> Check backup folder in external memory!"
-               		if [ ! -e /$BACKUP_TO/LogFile.txt ]
+               		if [ ! -e /$BACKUP_TO/LogFile.log ]
         		then
-                		echo $SBLOG > /$BACKUP_TO/LogFile.txt
+                		echo $SBLOG > /$BACKUP_TO/LogFile.log
         		else
-                		echo $SBLOG >> /$BACKUP_TO/LogFile.txt
+                		echo $SBLOG >> /$BACKUP_TO/LogFile.log
         		fi
  
 		else
                         echo -e "\n\t--> Error occured! Please try again."
-                        if [ ! -e /$BACKUP_TO/LogFile.txt ]
+                        if [ ! -e /$BACKUP_TO/LogFile.log ]
         		then
-                		echo $FBLOG > /$BACKUP_TO/LogFile.txt
+                		echo $FBLOG > /$BACKUP_TO/LogFile.log
        			else
-                		echo $FBLOG >> /$BACKUP_TO/LogFile.txt
+                		echo $FBLOG >> /$BACKUP_TO/LogFile.log
         		fi
 
 			return 0
@@ -211,19 +211,19 @@ option4() {
                 if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files has been restored successfully!"
-			if [ ! -e /BackupFolder/LogFile.txt ]
+			if [ ! -e /BackupFolder/LogFile.log ]
         		then
-                		echo $SRLOG > /BackupFolder/LogFile.txt
+                		echo $SRLOG > /BackupFolder/LogFile.log
         		else
-                		echo $SRLOG >> /BackupFolder/LogFile.txt
+                		echo $SRLOG >> /BackupFolder/LogFile.log
         		fi
                 else
                         echo -e "\n\t--> Error occured! Please try again."
-                        if [ ! -e /BackupFolder/LogFile.txt ]
+                        if [ ! -e /BackupFolder/LogFile.log ]
                         then
-                                echo $FRLOG > /BackupFolder/LogFile.txt
+                                echo $FRLOG > /BackupFolder/LogFile.log
                         else
-                                echo $FRLOG >> /BackupFolder/LogFile.txt
+                                echo $FRLOG >> /BackupFolder/LogFile.log
                         fi
 
 			return 0
@@ -272,20 +272,20 @@ option5() {
                 if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files has been restored successfully!"
-               		if [ ! -e /$BFOLDER/LogFile.txt ]
+               		if [ ! -e /$BFOLDER/LogFile.log ]
                         then
-                                echo $SRLOG > /$BFOLDER/LogFile.txt
+                                echo $SRLOG > /$BFOLDER/LogFile.log
                         else
-                                echo $SRLOG >> /$BFOLDER/LogFile.txt
+                                echo $SRLOG >> /$BFOLDER/LogFile.log
                         fi
  
 		else
                         echo -e "\n\t--> Error occured! Please try again."
-                        if [ ! -e /$BFOLDER/LogFile.txt ]
+                        if [ ! -e /$BFOLDER/LogFile.log ]
                         then
-                                echo $FRLOG > /$BFOLDER/LogFile.txt
+                                echo $FRLOG > /$BFOLDER/LogFile.log
                         else
-                                echo $FRLOG >> /$BFOLDER/LogFile.txt
+                                echo $FRLOG >> /$BFOLDER/LogFile.log
                         fi
 
 			return 0
@@ -339,20 +339,20 @@ option6() {
                 if [ "$?" -eq "0" ]
                 then
                         echo -e "\n\t--> Files has been restored successfully!"
-               		if [ ! -e /$BACKUP_TO/LogFile.txt ]
+               		if [ ! -e /$BACKUP_TO/LogFile.log ]
                         then
-                                echo $SRLOG > /$BACKUP_TO/LogFile.txt
+                                echo $SRLOG > /$BACKUP_TO/LogFile.log
                         else
-                                echo $SRLOG >> /$BACKUP_TO/LogFile.txt
+                                echo $SRLOG >> /$BACKUP_TO/LogFile.log
                         fi
  
 		else
                         echo -e "\n\t--> Error occured! Please try again."
-                        if [ ! -e /$BACKUP_TO/LogFile.txt ]
+                        if [ ! -e /$BACKUP_TO/LogFile.log ]
                         then
-                                echo $FRLOG > /$BACKUP_TO/LogFile.txt
+                                echo $FRLOG > /$BACKUP_TO/LogFile.log
                         else
-                                echo $FRLOG >> /$BACKUP_TO/LogFile.txt
+                                echo $FRLOG >> /$BACKUP_TO/LogFile.log
                         fi
 
 			return 0
