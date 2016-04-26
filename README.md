@@ -11,7 +11,7 @@ To start, open terminal and enter 'sudo su'. After entering your password,
 enter the command 'cd /' to go to root. Then clone BackupAndRestore  
 repository by entering this code:  
 git clone "https://github.com/RudolfSuguitan/BackupAndRestore.git"  
-You should not anything from this repository in the root  
+You should not move anything from this repository in the root  
 You also have to be logged in as root to run scripts    
 
 The repository should include 3 files, BackupAndRestore.sh, AutoBackup,sh,  
