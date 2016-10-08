@@ -1,6 +1,7 @@
 #!/bin/bash
 
 #forcing the user to run as root
+#year 2015 - 2016
 if [ "$EUID" -ne "0" ]
 then
 	echo -e "\n\t--> You have to be root to run this file! < --\n"
